@@ -1,0 +1,18 @@
+# Este compose sobe apenas o broker RabbitMQ com UI de administração.
+# Minha decisão: manter os serviços Java por fora (mvn exec ou java -jar) facilita a demonstração (2P + 4C em terminais).
+services:
+  rabbitmq:
+    image: rabbitmq:3-management                 # Imagem com plugin da UI embutido
+    container_name: tf-rabbitmq                  # Nome fixo para facilitar comandos docker
+    ports:
+      - "5672:5672"                              # Porta AMQP (cliente Java)
+      - "15672:15672"                            # UI de gerenciamento (http://localhost:15672)
+    environment:
+      RABBITMQ_DEFAULT_USER: guest               # Usuário padrão (suficiente para demo local)
+      RABBITMQ_DEFAULT_PASS: guest               # Senha padrão
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"] # Valida que o servidor respondeu
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped                      # Reinicia caso pare (útil durante a gravação)

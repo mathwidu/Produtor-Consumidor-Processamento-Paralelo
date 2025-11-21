@@ -1,0 +1,100 @@
+<!--
+  POM "pai" do projeto. Este arquivo agrega os módulos e centraliza
+  configurações e versões. Comentários explicam cada linha/elemento.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Versão do modelo de POM -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Coordenadas do artefato "pai" (grupo e identificador) -->
+    <groupId>com.trabalho.finalpc</groupId>
+    <artifactId>trabalho-final-parent</artifactId>
+    <!-- Versão do artefato pai -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- Este POM não empacota código; apenas agrega módulos -->
+    <packaging>pom</packaging>
+
+    <!-- Metadados do projeto (legibilidade) -->
+    <name>Trabalho Final - Parent</name>
+    <description>Parent POM para o projeto Produtor-Consumidor com mensageria</description>
+
+    <!-- Propriedades reutilizáveis (Java, encoding e versões) -->
+    <properties>
+        <!-- Define Java 17 como linguagem-fonte -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <!-- Define Java 17 como alvo do bytecode -->
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Encoding padrão do projeto -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Versão centralizada do SLF4J (API/implem.) -->
+        <slf4j.version>2.0.12</slf4j.version>
+        <!-- Versão do JUnit (caso adicionemos testes depois) -->
+        <junit.version>5.10.2</junit.version>
+        <!-- Versões para mensageria/JSON -->
+        <rabbitmq.client.version>5.18.0</rabbitmq.client.version>
+        <jackson.version>2.17.2</jackson.version>
+    </properties>
+
+    <!-- Lista de módulos filhos deste projeto -->
+    <modules>
+        <!-- Módulo com tipos/utilitários compartilhados -->
+        <module>common</module>
+        <!-- Módulo da aplicação produtora -->
+        <module>producer-app</module>
+        <!-- Módulo da aplicação consumidora -->
+        <module>consumer-app</module>
+    </modules>
+
+    <!-- Gerenciamento centralizado de dependências (versões) -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- API de logging (interface) -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Implementação simples do SLF4J (loga no console) -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- Gerenciamos versões de deps comuns -->
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${rabbitmq.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Gerenciamento centralizado de plugins de build -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Plugin do compilador Java -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <!-- Compila e verifica compatibilidade com Java 17 -->
+                        <release>17</release>
+                    </configuration>
+                </plugin>
+                <!--
+                  FUTURO: adicionaremos maven-shade-plugin aqui para gerar
+                  fat-jars executáveis de producer-app e consumer-app.
+                -->
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

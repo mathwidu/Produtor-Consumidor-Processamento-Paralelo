@@ -1,0 +1,40 @@
+<!--
+  Módulo "common": contém tipos, DTOs e contratos compartilhados entre os
+  serviços (produtores e consumidores). Não contém lógica de negócio.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Versão do modelo de POM -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Herda configurações do POM pai -->
+    <parent>
+        <groupId>com.trabalho.finalpc</groupId>
+        <artifactId>trabalho-final-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- Identificador deste módulo -->
+    <artifactId>common</artifactId>
+    <name>Common</name>
+    <description>Tipos e utilitários compartilhados</description>
+
+    <!-- Dependências somente de API (sem implementar nada aqui) -->
+    <dependencies>
+        <!-- API de logging para permitir logs em classes comuns -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- JSON (Jackson) para codec de mensagens -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!--
+          FUTURO: poderemos adicionar Jackson (JSON) e validação (jakarta.validation)
+          quando formos serializar ProductMessage e validar entradas.
+        -->
+    </dependencies>
+
+</project>

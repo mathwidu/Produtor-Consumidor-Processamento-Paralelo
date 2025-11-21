@@ -1,0 +1,23 @@
+# Build outputs
+target/
+*/target/
+
+# IDE/editor
+.idea/
+.vscode/
+*.iml
+
+# OS artefacts
+.DS_Store
+
+# Logs and artifacts
+logs/
+artifacts/
+
+# Local env files
+.env
+
+# Materiais do professor (não incluir no envio)
+Conteudos-professor/
+*.pdf
+
