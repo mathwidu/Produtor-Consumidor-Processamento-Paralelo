@@ -96,12 +96,4 @@ Arquivo de exemplo: `.env.example`
 - Exchange `products` (direct) com bindings `typeA` e `typeB`.
 - Filas `products.typeA`/`products.typeB` com Ready (mensagens pendentes) e Consumers (processos conectados).
 
-## Possíveis melhorias (bônus)
-- Ack manual (autoAck=false + basicAck após o processamento) para maior resiliência.
-- Modo push (basicConsume) com prefetch=1 caso a necessidade por tipo não varie a cada iteração.
-- Kubernetes/Helm para orquestrar 2P+4C em cluster.
-
----
-
-Para um relato mais detalhado das escolhas e do fluxo (nível acadêmico), consulte `PLANO_DO_TRABALHO.md`, que contém a visão, o mapeamento de requisitos, e um roteiro de apresentação.
 
